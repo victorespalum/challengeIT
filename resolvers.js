@@ -85,8 +85,8 @@ const resolvers = {
             return newUser
         },
         createGame: async (_, args) => {
-            const { title, description, active } = args
-            const newGame = new Game({ title, description, active })
+            const { title, description, active, image } = args
+            const newGame = new Game({ title, description, active, image })
             console.log(newGame)
             await newGame.save()
             return newGame

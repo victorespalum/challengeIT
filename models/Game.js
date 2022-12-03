@@ -12,6 +12,10 @@ const gameSchema = new Schema({
     tournaments: {
         type: [String],
         required: false
+    },
+    image: {
+        type: String,
+        required: false
     }
 })
 
