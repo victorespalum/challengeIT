@@ -34,6 +34,7 @@ type Tournament{
     prize: String
     description: String
     participants: [String]
+    image: String
 }
 
 type Query {
@@ -77,6 +78,7 @@ input TournamentInput {
     prize: String
     description: String
     participants: [String]
+    image: String
 }
 
 ### username: String, password: String en lugar de User: UserInput!
@@ -84,7 +86,7 @@ input TournamentInput {
  type Mutation {
     createUser(name: String!, surname: String!, address: String!, phone: String!, coins: String!, trophies: String!, sesion: Boolean! username: String!, password: String!, description: String!): User
     createGame(title: String!, description: String!, tournaments: [String], image: String): Game
-    createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String]): Tournament
+    createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String): Tournament
     deleteUser(id: ID!): String
     deleteGame(id: ID!): String
     deleteTournament(id: ID!): String

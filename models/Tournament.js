@@ -32,6 +32,10 @@ const tournamentSchema = new Schema ({
     participants: {
         type: [String],
         required: false
+    },
+    image: {
+        type: String,
+        required: false
     }
 
 })

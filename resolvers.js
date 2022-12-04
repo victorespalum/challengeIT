@@ -92,8 +92,8 @@ const resolvers = {
             return newGame
         },
         createTournament: async (_,args) => {
-            const {title, schedule, map, kills, playStyle, prize, description, participants } = args
-            const newTournament = new Tournament({title, schedule, map, kills, playStyle, prize, description, participants})
+            const {title, schedule, map, kills, playStyle, prize, description, participants, image } = args
+            const newTournament = new Tournament({title, schedule, map, kills, playStyle, prize, description, participants, image})
             await newTournament.save()
             return newTournament
         },
