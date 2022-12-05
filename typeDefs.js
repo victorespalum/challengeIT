@@ -14,6 +14,7 @@ type User{
     username: String
     password: String 
     description: String
+    image: String
 }
 
 type Game{
@@ -60,6 +61,7 @@ input UserInput {
     username: String 
     password: String 
     description: String
+    image: String
 }
 
 input GameInput {
@@ -84,7 +86,7 @@ input TournamentInput {
 ### username: String, password: String en lugar de User: UserInput!
 
  type Mutation {
-    createUser(name: String!, surname: String!, address: String!, phone: String!, coins: String!, trophies: String!, sesion: Boolean! username: String!, password: String!, description: String!): User
+    createUser(name: String!, surname: String!, address: String!, phone: String!, coins: String!, trophies: String!, sesion: Boolean! username: String!, password: String!, description: String!, image: String!): User
     createGame(title: String!, description: String!, tournaments: [String], image: String): Game
     createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String): Tournament
     deleteUser(id: ID!): String
