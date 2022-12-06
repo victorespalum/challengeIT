@@ -1,4 +1,5 @@
 const Game = require('./models/Game')
+const Reward = require('./models/Reward')
 const Tournament = require('./models/Tournament')
 const User = require('./models/User')
 
@@ -18,6 +19,10 @@ const resolvers = {
             const tournaments = await Tournament.find()
             return tournaments
         },
+        getAllRewards: async () => {
+            const rewards = await Reward.find()
+            return rewards
+        },
         getUser: async (_, args) => {
             const user = await User.findById(args.id)
             return user
@@ -29,6 +34,10 @@ const resolvers = {
         getTournament: async (_,args) => {
             const tournament = await Tournament.findById(args.id)
             return tournament
+        },
+        getReward: async (_,args) => {
+            const reward = await Reward.findById(args.id)
+            return reward
         },
         loginCredentials: async(_,args) => {
             const {username, password} = args
@@ -97,6 +106,12 @@ const resolvers = {
             await newTournament.save()
             return newTournament
         },
+        createReward: async (_,args) => {
+            const {name, description, image, price, stock } = args
+            const newReward = new Reward({name, description, image, price, stock})
+            await newReward.save()
+            return newReward
+        },
         deleteUser: async (_, { id }) => {
             console.log('ID de usuario a eliminar: ',id)
             await User.findByIdAndDelete(id)
@@ -109,6 +124,10 @@ const resolvers = {
         deleteTournament: async (_, { id }) => {
             await Tournament.findByIdAndDelete(args, id)
             return 'Torneo eliminado'
+        },
+        deleteReward: async (_, { id }) => {
+            await Reward.findByIdAndDelete(args,id)
+            return 'Recompensa eliminada'
         },
         updateUser: async (_, { id, user }) => {
 
@@ -128,6 +147,12 @@ const resolvers = {
                 $set: tournament
             }, { new: true})
             return tournamentUpdated
+        },
+        updateReward: async (_, {id, reward}) => {
+            const rewardUpdated = await Reward.findByIdAndUpdate(id, {
+                $set: reward
+            }, {new: true})
+            return rewardUpdated
         }
     }
 }

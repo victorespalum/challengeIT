@@ -38,6 +38,15 @@ type Tournament{
     image: String
 }
 
+type Reward{
+    id: ID
+    name: String
+    description: String
+    image: String
+    price: String
+    stock: String
+}
+
 type Query {
     hello: String
     getAllUsers: [User]
@@ -46,6 +55,8 @@ type Query {
     getGame(id: ID): Game
     getAllTournaments: [Tournament]
     getTournament(id: ID): Tournament
+    getAllRewards: [Reward]
+    getReward(id: ID): Reward
     loginCredentials(username: String!, password: String!): String
     logout(username: String!): String
 }
@@ -83,18 +94,29 @@ input TournamentInput {
     image: String
 }
 
+input RewardInput {
+    name: String
+    description: String
+    image: String
+    price: String
+    stock: String
+}
+
 ### username: String, password: String en lugar de User: UserInput!
 
  type Mutation {
     createUser(name: String!, surname: String!, address: String!, phone: String!, coins: String!, trophies: String!, sesion: Boolean! username: String!, password: String!, description: String!, image: String!): User
     createGame(title: String!, description: String!, tournaments: [String], image: String): Game
     createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String): Tournament
+    createReward(name: String!, description: String!, image: String, price: String!, stock: String!): Reward
     deleteUser(id: ID!): String
     deleteGame(id: ID!): String
     deleteTournament(id: ID!): String
+    deleteReward(id: ID!): String
     updateUser(id: ID!, user: UserInput): User
     updateGame(id: ID!, game: GameInput): Game
     updateTournament(id: ID!, tournament: TournamentInput): Tournament
+    updateReward(id: ID!, reward: RewardInput): Reward
 }
 `
 module.exports = { typeDefs }
