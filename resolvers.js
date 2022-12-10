@@ -2,6 +2,7 @@ const Game = require('./models/Game')
 const Reward = require('./models/Reward')
 const Tournament = require('./models/Tournament')
 const User = require('./models/User')
+const RewardTransaction = require ('./models/RewardTransaction')
 
 const resolvers = {
 
