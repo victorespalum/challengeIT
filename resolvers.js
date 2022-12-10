@@ -23,6 +23,10 @@ const resolvers = {
             const rewards = await Reward.find()
             return rewards
         },
+        getAllRewardTransactions: async () => {
+            const rewardTransactions = await RewardTransaction.find()
+            return rewardTransactions
+        },
         getUser: async (_, args) => {
             const user = await User.findById(args.id)
             return user
@@ -38,6 +42,10 @@ const resolvers = {
         getReward: async (_,args) => {
             const reward = await Reward.findById(args.id)
             return reward
+        },
+        getRewardTransaction: async (_,args) => {
+            const rewardTransaction = await RewardTransaction.findById(args.id)
+            return rewardTransaction
         },
         loginCredentials: async(_,args) => {
             const {username, password} = args
@@ -112,6 +120,12 @@ const resolvers = {
             await newReward.save()
             return newReward
         },
+        createRewardTransaction: async (_,args) => {
+            const {reward, user, address, date } = args
+            const newRewardTransaction = new RewardTransaction({reward, user, address, date})
+            await newRewardTransaction.save()
+            return newRewardTransaction
+        },
         deleteUser: async (_, { id }) => {
             console.log('ID de usuario a eliminar: ',id)
             await User.findByIdAndDelete(id)
@@ -128,6 +142,10 @@ const resolvers = {
         deleteReward: async (_, { id }) => {
             await Reward.findByIdAndDelete(args,id)
             return 'Recompensa eliminada'
+        },
+        deleteRewardTransaction: async (_, { id } )=> {
+            await RewardTransaction.findByIdAndDelete(args,id)
+            return 'Transacción de recompensa eliminada'
         },
         updateUser: async (_, { id, user }) => {
 
@@ -153,6 +171,12 @@ const resolvers = {
                 $set: reward
             }, {new: true})
             return rewardUpdated
+        },
+        updateRewardTransaction: async (_, {id, rewardTransaction}) =>{
+            const rewardTransactionUpdated = await RewardTransaction.findByIdAndUpdate(id, {
+                $set: rewardTransaction
+            }, {new: true})
+            return rewardTransactionUpdated
         }
     }
 }
