@@ -3,6 +3,7 @@ const Reward = require('./models/Reward')
 const Tournament = require('./models/Tournament')
 const User = require('./models/User')
 const RewardTransaction = require ('./models/RewardTransaction')
+const ResultTransaction = require ('./models/ResultTransaction')
 
 const resolvers = {
 
@@ -28,6 +29,10 @@ const resolvers = {
             const rewardTransactions = await RewardTransaction.find()
             return rewardTransactions
         },
+        getAllResultTransactions: async () => {
+            const resultTransactions = await ResultTransaction.find()
+            return resultTransactions
+        },
         getUser: async (_, args) => {
             const user = await User.findById(args.id)
             return user
@@ -47,6 +52,10 @@ const resolvers = {
         getRewardTransaction: async (_,args) => {
             const rewardTransaction = await RewardTransaction.findById(args.id)
             return rewardTransaction
+        },
+        getResultTransaction: async (_,args) => {
+            const resultTransaction = await ResultTransaction.findById(args.id)
+            return resultTransaction
         },
         loginCredentials: async(_,args) => {
             const {username, password} = args
@@ -127,6 +136,12 @@ const resolvers = {
             await newRewardTransaction.save()
             return newRewardTransaction
         },
+        createResultTransaction: async (_,args) => {
+            const {tournament, user, result, prize } = args
+            const newResultTransaction = new ResultTransaction({tournament,user, result, prize})
+            await newResultTransaction.save()
+            return newResultTransaction
+        },
         deleteUser: async (_, { id }) => {
             console.log('ID de usuario a eliminar: ',id)
             await User.findByIdAndDelete(id)
@@ -144,9 +159,13 @@ const resolvers = {
             await Reward.findByIdAndDelete(args,id)
             return 'Recompensa eliminada'
         },
-        deleteRewardTransaction: async (_, { id } )=> {
+        deleteRewardTransaction: async (_, { id } ) => {
             await RewardTransaction.findByIdAndDelete(args,id)
             return 'Transacción de recompensa eliminada'
+        },
+        deleteResultTransaction: async (_, { id } ) => {
+            await ResultTransaction.findByIdAndDelete(args, id)
+            return 'Transacción de resultado eliminada'
         },
         updateUser: async (_, { id, user }) => {
 
@@ -173,11 +192,17 @@ const resolvers = {
             }, {new: true})
             return rewardUpdated
         },
-        updateRewardTransaction: async (_, {id, rewardTransaction}) =>{
+        updateRewardTransaction: async (_, {id, rewardTransaction}) => {
             const rewardTransactionUpdated = await RewardTransaction.findByIdAndUpdate(id, {
                 $set: rewardTransaction
             }, {new: true})
             return rewardTransactionUpdated
+        },
+        updateResultTransaction: async (_, {id, resultTransaction}) => {
+            const resultTransactionUpdated = await ResultTransaction.findByIdAndUpdate(id , {
+                $set: resultTransaction
+            }, {new: true})
+            return resultTransactionUpdated
         }
     }
 }

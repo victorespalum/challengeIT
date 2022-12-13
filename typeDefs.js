@@ -55,6 +55,14 @@ type RewardTransaction{
     date: String
 }
 
+type ResultTransaction{
+    id: ID
+    tournament: String
+    user: String
+    result: String
+    prize: String
+}
+
 type Query {
     hello: String
     getAllUsers: [User]
@@ -67,6 +75,8 @@ type Query {
     getReward(id: ID): Reward
     getAllRewardTransactions: [RewardTransaction]
     getRewardTransaction(id: ID): RewardTransaction
+    getAllResultTransactions: [ResultTransaction]
+    getResultTransaction(id: ID): ResultTransaction
     loginCredentials(username: String!, password: String!): String
     logout(username: String!): String
 }
@@ -119,6 +129,13 @@ input RewardTransactionInput {
     date: String
 }
 
+input ResultTransactionInput {
+    tournament: String
+    user: String
+    result: String
+    prize: String
+}
+
 ### username: String, password: String en lugar de User: UserInput!
 
  type Mutation {
@@ -127,16 +144,19 @@ input RewardTransactionInput {
     createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String): Tournament
     createReward(name: String!, description: String!, image: String, price: String!, stock: String!): Reward
     createRewardTransaction(reward: String!, user: String!, address: String!, date: String!): RewardTransaction
+    createResultTransaction(tournament: String!, user: String!, result: String!, prize: String!): ResultTransaction
     deleteUser(id: ID!): String
     deleteGame(id: ID!): String
     deleteTournament(id: ID!): String
     deleteReward(id: ID!): String
     deleteRewardTransaction(id: ID!): String
+    deleteResultTransaction(id: ID!): String
     updateUser(id: ID!, user: UserInput): User
     updateGame(id: ID!, game: GameInput): Game
     updateTournament(id: ID!, tournament: TournamentInput): Tournament
     updateReward(id: ID!, reward: RewardInput): Reward
     updateRewardTransaction(id: ID!, rewardTransaction: RewardTransactionInput): RewardTransaction
+    updateResultTransaction(id: ID!, resultTransaction: ResultTransactionInput): ResultTransaction
 }
 `
 module.exports = { typeDefs }
