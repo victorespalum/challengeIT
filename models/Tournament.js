@@ -36,7 +36,15 @@ const tournamentSchema = new Schema ({
     image: {
         type: String,
         required: false
-    }
+    },
+    sessionName: {
+        type: String,
+        required: true
+    },
+    sessionPwd: {
+        type: String,
+        required: true
+    }    
 
 })
 
