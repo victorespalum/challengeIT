@@ -44,6 +44,10 @@ const userSchema = new Schema({
     image: {
         type: String,
         required: true
+    },
+    admin: {
+        type: String,
+        required: true
     }
 })
 

@@ -104,9 +104,9 @@ const resolvers = {
     },
     Mutation: {
         createUser: async (_, args) => {
-            const { name, surname, address, phone, coins, trophies, sesion, username, password, description, image } = args
+            const { name, surname, address, phone, coins, trophies, sesion, username, password, description, image, admin } = args
             console.log(args)
-            const newUser = new User({name, surname, address, phone, coins, trophies, sesion, username, password, description, image})
+            const newUser = new User({name, surname, address, phone, coins, trophies, sesion, username, password, description, image, admin})
             //console.log(newUser)
             await newUser.save()
             return newUser
