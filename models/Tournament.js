@@ -44,7 +44,11 @@ const tournamentSchema = new Schema ({
     sessionPwd: {
         type: String,
         required: true
-    }    
+    },
+    finished: {
+        type: String,
+        required: true
+    }
 
 })
 

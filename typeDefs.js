@@ -39,6 +39,7 @@ type Tournament{
     image: String,
     sessionName: String,
     sessionPwd: String
+    finished: String
 }
 
 type Reward{
@@ -118,6 +119,7 @@ input TournamentInput {
     image: String
     sessionName: String
     sessionPwd: String
+    finished: String
 }
 
 input RewardInput {
@@ -147,7 +149,7 @@ input ResultTransactionInput {
  type Mutation {
     createUser(name: String!, surname: String!, address: String!, phone: String!, coins: String!, trophies: String!, sesion: Boolean! username: String!, password: String!, description: String!, image: String!, admin: String!): User
     createGame(title: String!, description: String!, tournaments: [String], image: String): Game
-    createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String, sessionName: String!, sessionPwd: String!): Tournament
+    createTournament(title: String!, schedule: String!, map: String!,kills: String!, playStyle: String!, prize: String!, description: String, participants: [String], image: String, sessionName: String!, sessionPwd: String!, finished: String!): Tournament
     createReward(name: String!, description: String!, image: String, price: String!, stock: String!): Reward
     createRewardTransaction(reward: String!, user: String!, address: String!, date: String!): RewardTransaction
     createResultTransaction(tournament: String!, user: String!, result: String!, prize: String!): ResultTransaction
